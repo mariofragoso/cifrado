@@ -5,7 +5,7 @@
  * Date: 4/03/19
  * Time: 01:04 PM */
 
-//include_once('../sql/repositorio.php');
+//include_once('../conexion/conexion.php');
 
 //	$transaccion=$_POST['valorEliminar'];
 //	$sqlInsertarEtiqueta= "INSERT INTO herramientas VALUES (NULL, '".$descripcion."', '".$codigo."', '".$valorCategoria."')";
@@ -32,4 +32,7 @@ if ($email == 'mario@gmail.com' and $pass == '123') {
 
 }
 
+
 ?>
+
+
