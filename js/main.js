@@ -66,6 +66,8 @@ $(document).ready(function () {
                 if (data.tipo==1)
                     alert(data.msg)
 
+
+
                 {
 
                 }
