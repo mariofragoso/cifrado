@@ -1,86 +1,136 @@
-$(document).ready(function () {
-    $("#google").on('click',function () {
-        $("#email").hide();
-        $("#pass").hide();
-    });
-    $('#facebook').on('click',function () {
-        $('#email').show();
-        $('#pass').show();
-    });
+var tabla;
 
-/**    $('#ingresar').on('click',function () {
-        var usr, pass, usuario="mario@gmail.com", password="123";
-        usr=$("#email").val();
-        pass=$("#pass").val();
-        console.log(usr);
 
-        if(usr == usuario &&  pass == password){
-            document.getElementById("modalTitle").innerHTML="Bienvenido";
-            document.getElementById("m-body").innerHTML="Usted esta ingresando";;
-            $("#showModal").modal('show');
-            $("#button-modal").on('click',function(){
-                window.location.href="index.html";
+//Funcion que se ejectua al inicio
+function init() {
+    listar();
 
-            });
-        }
-        else if (usr=="" || pass==""){
-            document.getElementById("m-body").innerHTML="Coloca tus datos";
+    //cuando se da click al boton submit entonces se ejecuta la funcion guardaryeditar(e);
+    $("#usuario_form").on("submit",function(e)
+    {
 
-            $("#showModal").modal('show');
-            $("#button-modal").on('click',function(){
-                window.location.href="login.html";
+        guardaryeditar(e);
+    })
 
-            });
-        }
-        else{
-            document.getElementById("modalTitle").innerHTML="Verifica tus datos ";
-            document.getElementById("m-body").innerHTML="Tus datos son incorrectos";
-            $("#showModal").modal('show');
-            $("#button-modal").on('click',function(){
-                window.location.href="login.html";
+    //cambia el titulo de la ventana modal cuando se da click al boton
+    $("#add_button").click(function(){
 
-            });
-        }
+        $(".modal-title").text("Agregar Usuario");
+
     });
 
-*/
-    $('#ingresar').on('click', function (event) {
-        event.preventDefault();
-        var email= $('#email').val();
-        var pass= $('#pass').val();
-        var data = new FormData();
-        data.append('email',email);
-        data.append('pass',pass);
 
-        var url= "/cifrado/php/transaccion.php";
-        $.ajax({
-            url: url,
-            type:'POST',
-            contentType: false,
-            data: data,
-            processData: false,
-            cache: false,
-            dataType: "json",
-            success: function(data)
+
+}
+//funcion que limpia los campos del formulario
+function limpiar(){
+
+    $('#nombre').val("");
+    $('#apellidos').val("");
+    $('#correo').val("");
+    $('#pass').val("");
+    $('#pass2').val("");
+    $('#id').val("");
+}
+//function listar
+
+function listar(){
+
+    tabla=$('#usuario_data').dataTable({
+
+        "aProcessing": true,//Activamos el procesamiento del datatables
+        "aServerSide": true,//Paginación y filtrado realizados por el servidor
+        dom: 'Bfrtip',//Definimos los elementos del control de tabla
+
+        "ajax":
+
             {
-                if (data.tipo==1)
-                    alert(data.msg)
-
-
-
-                {
-
-                }
-                if (data.tipo==2){
-                    alert(data.msg)
+                url: 'php/funcionajax.php?op=listar',
+                type : "get",
+                dataType : "json",
+                error: function(e){
+                    console.log(e.responseText);
                 }
             },
-            error: function(data)
-            {
-                alert ("Error");
-            }
+
+        "bDestroy": true,
+        "responsive": true,
+        "bInfo":true,
+        "iDisplayLength": 10,//Por cada 10 registros hace una paginación
+        "order": [[ 0, "desc" ]],//Ordenar (columna,orden)
+
+        //cerrando language
+    }).DataTable();
+}
+//Mostrar datos del usuario en la ventana modal del formulario
+
+function mostrar(id){
+
+    $.post("php/funcionajax.php?op=mostrar",{id : id}, function(data, status)
+
+    {
+
+        data = JSON.parse(data);
+
+        $("#usuarioModal").modal("show");
+        $('#nombre').val(data.nombre);
+        $('#apellidos').val(data.apellidos);
+        $('#correo').val(data.correo);
+        $('#pass').val(data.pass);
+        $('#pass2').val(data.pass2);
+        $('.modal-title').text("Editar Usuario");
+        $('#id').val(id);
+        $('#action').val("Edit");
+
 
     });
-});
 
-});
+}
+//la funcion guardaryeditar(e); se llama cuando se da click al boton submit
+
+function guardaryeditar(e){
+
+    e.preventDefault(); //No se activará la acción predeterminada del evento
+    var formData = new FormData($("#usuario_form")[0]);
+
+    var pass= $("#pass").val();
+    var pass2= $("#pass2").val();
+
+    //si el password conincide entonces se envia el formulario
+    if(pass == pass2){
+
+        $.ajax({
+
+            url: "php/funcionajax.php?op=guardaryeditar",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+
+            success: function(datos){
+
+                console.log(datos);
+
+                $('#usuario_form')[0].reset();
+                $('#usuarioModal').modal('hide');
+
+                $('#resultados_ajax').html(datos);
+                $('#usuario_data').DataTable().ajax.reload();
+
+                limpiar();
+
+            }
+        });
+
+    } //cierre de la validacion
+
+
+    else {
+
+        bootbox.alert("No coincide el password");
+    }
+
+}
+
+
+init();
