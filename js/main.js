@@ -88,16 +88,16 @@ function mostrar(id){
 }
 //la funcion guardaryeditar(e); se llama cuando se da click al boton submit
 
-function guardaryeditar(e){
+function guardaryeditar(e) {
 
     e.preventDefault(); //No se activará la acción predeterminada del evento
     var formData = new FormData($("#usuario_form")[0]);
 
-    var pass= $("#pass").val();
-    var pass2= $("#pass2").val();
+    var pass = $("#pass").val();
+    var pass2 = $("#pass2").val();
 
     //si el password conincide entonces se envia el formulario
-    if(pass == pass2){
+    if (pass == pass2) {
 
         $.ajax({
 
@@ -107,7 +107,7 @@ function guardaryeditar(e){
             contentType: false,
             processData: false,
 
-            success: function(datos){
+            success: function (datos) {
 
                 console.log(datos);
 
@@ -130,7 +130,37 @@ function guardaryeditar(e){
         bootbox.alert("No coincide el password");
     }
 
+
 }
+
+function eliminar(id){
+
+
+    bootbox.confirm("¿Está Seguro de eliminar el usuario?", function(result){
+        if(result)
+        {
+            $.ajax({
+                url:"php/funcionajax.php?op=eliminar_usuario",
+                method:"POST",
+                data:{id:id},
+
+                success:function(data)
+                {
+                    //alert(data);
+                    $("#resultados_ajax").html(data);
+                    $("#usuario_data").DataTable().ajax.reload();
+                }
+            });
+
+        }
+
+    });//bootbox
+
+
+}
+
+
+
 
 
 init();

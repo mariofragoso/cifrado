@@ -22,6 +22,7 @@ $correo = isset($_POST["correo"]);
 $pass = isset($_POST["pass"]);
 $pass2 = isset($_POST["pass2"]);
 
+
 switch ($_GET["op"]) {
 
     case "guardaryeditar":
@@ -207,7 +208,25 @@ switch ($_GET["op"]) {
 
         break;
 
+    case "eliminar_usuario":
 
-}
+        $datos= $transaccion->get_usuario_por_id($_POST["id"]);
+
+        if (empty($_POST["id"])) {
+
+            /*si coincide pass1 y pass2 entonces verificamos si existe el correo en la base de datos, si ya existe un registro con el correo entonces no se registra el usuario*/
+
+            if (is_array($datos) == true and count($datos) > 0) {
+
+
+                $transaccion->eliminar_usuario($id);
+
+                $messages[] = "el usuario de elimino ";
+
+
+            }
+        }
+
+            }
 
 ?>
