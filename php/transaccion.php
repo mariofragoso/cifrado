@@ -90,13 +90,13 @@ class transaccion extends Conectar
 
     //Registrar usuario
 
-    public function registrar_usuario($nombre, $apellidos, $correo, $pass, $pass2)
+    public function registrar_usuario($nombre, $apellidos, $correo, $pass)
     {
 
         $conectar = parent::conexion();
         parent::set_names();
 
-        $sql = "insert into usuarios values(null,?,?,?,?,?);";
+        $sql = "insert into usuarios values(null,?,?,?,?);";
 
         $sql = $conectar->prepare($sql);
 
@@ -104,13 +104,11 @@ class transaccion extends Conectar
         $sql->bindValue(2, $_POST["apellidos"]);
         $sql->bindValue(3, $_POST["correo"]);
         $sql->bindValue(4, sha1($_POST["pass"]));
-        $sql->bindValue(5, sha1($_POST["pass2"]));
-
         $sql->execute();
     }
 
     //metodo para editar usuario
-    public function editar_usuario($id, $nombre, $apellidos, $correo, $pass, $pass2)
+    public function editar_usuario($id, $nombre, $apellidos, $correo, $pass)
     {
 
         $conectar = parent::conexion();
@@ -121,8 +119,7 @@ class transaccion extends Conectar
               nombre=?,
               apellidos=?,
               correo=?,
-              pass=?,
-              pass2=?
+              pass=?
               where 
               id=?
               
@@ -136,8 +133,7 @@ class transaccion extends Conectar
         $sql->bindValue(2, $_POST["apellidos"]);
         $sql->bindValue(3, $_POST["correo"]);
         $sql->bindValue(4, sha1($_POST["pass"]));
-        $sql->bindValue(5, sha1($_POST["pass2"]));
-        $sql->bindValue(6, $_POST["id"]);
+        $sql->bindValue(5, $_POST["id"]);
 
         $sql->execute();
 
@@ -150,7 +146,7 @@ class transaccion extends Conectar
         parent::set_names();
 
         $sql="select * from usuarios where id=?";
-
+   
         $sql=$conectar->prepare($sql);
 
         $sql->bindValue(1, $id);
@@ -180,9 +176,8 @@ class transaccion extends Conectar
 
         $conectar=parent::conexion();
 
-
-        $sql="delete * from usuarios where id=?";
-
+        $sql="delete from usuarios where id=?";
+        
         $sql=$conectar->prepare($sql);
         $sql->bindValue(1,$id);
         $sql->execute();
