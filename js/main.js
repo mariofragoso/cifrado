@@ -127,7 +127,7 @@ function guardaryeditar(e) {
 
     else {
         
-        bootbox.alert("Las contraseñas con coinciden");
+        bootbox.alert("Las contraseñas no coinciden");
         $('#pass').val("");
         $('#pass2').val("");
         
