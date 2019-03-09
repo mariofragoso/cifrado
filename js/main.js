@@ -77,7 +77,7 @@ function mostrar(id){
         $('#apellidos').val(data.apellidos);
         $('#correo').val(data.correo);
         $('#pass').val(data.pass);
-        $('#pass2').val(data.pass2);
+        $('#pass2').val(data.pass);
         $('.modal-title').text("Editar Usuario");
         $('#id').val(id);
         $('#action').val("Edit");
@@ -126,15 +126,17 @@ function guardaryeditar(e) {
 
 
     else {
-
-        bootbox.alert("No coincide el password");
+        
+        bootbox.alert("Las contraseñas con coinciden");
+        $('#pass').val("");
+        $('#pass2').val("");
+        
     }
 
 
 }
 
 function eliminar(id){
-
 
     bootbox.confirm("¿Está Seguro de eliminar el usuario?", function(result){
         if(result)
@@ -154,7 +156,7 @@ function eliminar(id){
 
         }
 
-    });//bootbox
+    });
 
 
 }
