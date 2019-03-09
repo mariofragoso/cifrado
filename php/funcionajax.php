@@ -30,7 +30,7 @@ switch ($_GET["op"]) {
 //verificamos si existe el correo en la base de datos, si ya existe un registro con la cedula o correo entonces no se registra el usuario
 
         $datos = $transaccion->get_correo_del_usuario($_POST["correo"]);
-
+        
         //validacion de la contraseña
         if ($pass == $pass2) {
 
@@ -45,7 +45,7 @@ switch ($_GET["op"]) {
 
                     //no existe el usuario por lo tanto hacemos el registros
 
-                    $transaccion->registrar_usuario($nombre, $apellidos, $correo, $pass, $pass2);
+                    $transaccion->registrar_usuario($nombre, $apellidos, $correo, $pass);
 
                     $messages[] = "El usuario se registró correctamente";
 
@@ -63,7 +63,7 @@ switch ($_GET["op"]) {
 
                 /*si ya existe entonces editamos el usuario*/
 
-                $transaccion->editar_usuario($id, $nombre, $apellidos, $correo, $pass, $pass2);
+                $transaccion->editar_usuario($id, $nombre, $apellidos, $correo, $pass);
 
                 $messages[] = "El usuario se editó correctamente";
             }
@@ -83,7 +83,6 @@ switch ($_GET["op"]) {
             ?>
             <div class="alert alert-success" role="alert">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>¡Bien hecho!</strong>
                 <?php
                 foreach ($messages as $message) {
                     echo $message;
@@ -134,7 +133,7 @@ switch ($_GET["op"]) {
                 $output["apellidos"] = $row["apellidos"];
                 $output["correo"] = $row["correo"];
                 $output["pass"] = $row["pass"];
-                $output["pass2"] = $row["pass2"];
+                $output["pass2"] = $row["pass"];
             }
 
             echo json_encode($output);
@@ -209,24 +208,30 @@ switch ($_GET["op"]) {
         break;
 
     case "eliminar_usuario":
-
+        
         $datos= $transaccion->get_usuario_por_id($_POST["id"]);
+        //echo ($_POST["id"]);
+        //echo json_encode($datos);
+        $transaccion->eliminar_usuario($_POST["id"]);
+        $messages[] = "El usuario fue eliminado";
+        if (isset($messages)) {
 
-        if (empty($_POST["id"])) {
-
-            /*si coincide pass1 y pass2 entonces verificamos si existe el correo en la base de datos, si ya existe un registro con el correo entonces no se registra el usuario*/
-
-            if (is_array($datos) == true and count($datos) > 0) {
-
-
-                $transaccion->eliminar_usuario($id);
-
-                $messages[] = "el usuario de elimino ";
-
-
-            }
+            ?>
+            <div class="alert alert-success" role="alert">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <?php
+                foreach ($messages as $message) {
+                    echo $message;
+                }
+                ?>
+            </div>
+            <?php
         }
+        
+        break;
 
-            }
+    case "validar_usuario":
+    break; 
+}
 
 ?>
