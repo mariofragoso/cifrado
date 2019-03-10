@@ -1,3 +1,16 @@
+<?php
+require_once ("conexion/conexion.php");
+if(isset($_POST["enviar"]) and $_POST["enviar"]=="si"){
+
+    require_once("php/transaccion.php");
+
+    $usuario = new Usuarios();
+
+    $usuario->login();
+
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,9 +53,52 @@
                 <div class="text-center">
                   <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                 </div>
-                <form class="user">
+
+                  <?php
+
+
+                  if(isset($_GET["m"])) {
+
+                      switch($_GET["m"]){
+
+
+                          case "1";
+                              ?>
+
+                              <div class="alert alert-danger alert-dismissible">
+                                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                  <h4><i class="icon fa fa-ban"></i> El correo y/o password es incorrecto o no tienes permiso!</h4>
+
+                              </div>
+
+                              <?php
+                              break;
+
+
+                          case "2";
+                              ?>
+                              <div class="alert alert-danger alert-dismissible">
+                                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                  <h4><i class="icon fa fa-ban"></i> Los campos estan vacios</h4>
+
+                              </div>
+                              <?php
+                              break;
+
+
+
+                      }
+
+                  }
+
+
+                  ?>
+
+
+
+                <form class="user" method="post">
                   <div class="form-group">
-                    <input type="email" class="form-control form-control-user" id="email" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                    <input type="email" class="form-control form-control-user" id="correo" aria-describedby="emailHelp" placeholder="Enter Email Address...">
                   </div>
                   <div class="form-group">
                     <input type="password" class="form-control form-control-user" id="pass" placeholder="Password">
@@ -53,8 +109,12 @@
                       <label class="custom-control-label" for="customCheck">Remember Me</label>
                     </div>
                   </div>
-                  <button type="button" id="ingresar" class="btn btn-primary btn-user btn-block">
-                    Login
+                    <div class="form-group">
+                        <input type="hidden" name="enviar" class="form-control" value="si">
+
+                    </div>
+                  <button type="submit" id="ingresar" class="btn btn-primary btn-user btn-block">
+                    Iniciar
                   </button>
                   <hr>
                   <button  id="google" class="btn btn-google btn-user btn-block">
@@ -122,3 +182,4 @@
 </body>
 
 </html>
+
