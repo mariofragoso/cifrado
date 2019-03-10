@@ -4,8 +4,10 @@
  * User: fragoso
  * Date: 4/03/19
  * Time: 01:04 PM */
-require_once("../conexion/conexion.php");
 
+
+
+//require_once("../conexion/conexion.php");
 class transaccion extends Conectar
 {
     public function login(){
@@ -23,7 +25,7 @@ class transaccion extends Conectar
 
             if(empty($correo) and empty($pass)){
 
-                header("Location:".Conectar::ruta()."vistas/login.html");
+                header("Location:".Conectar::ruta()."index.php?m=2");
                 exit();
 
 
@@ -31,14 +33,14 @@ class transaccion extends Conectar
 
             else if(!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){12,15}$/", $pass)) {
 
-                header("Location:".Conectar::ruta()."index.html");
+                header("Location:".Conectar::ruta()."index.php?m=1");
                 exit();
 
             }
 
             else {
 
-                $sql= "select * from usuarios where correo=? and pass=?";
+                $sql= "select * from usuarios where correo=? || pass=?";
 
                 $sql=$conectar->prepare($sql);
 
@@ -55,7 +57,7 @@ class transaccion extends Conectar
                     $_SESSION["correo"] = $resultado["correo"];
                     $_SESSION["nombre"] = $resultado["nombre"];
 
-                    header("Location:".Conectar::ruta()."vistas/index.html");
+                    header("Location:".Conectar::ruta()."home.php");
 
                     exit();
 
@@ -63,7 +65,7 @@ class transaccion extends Conectar
                 } else {
 
                     //si no existe el registro entonces le aparece un mensaje
-                    header("Location:".Conectar::ruta()."vistas/login.html");
+                    header("Location:".Conectar::ruta()."index.php?m=1");
                     exit();
                 }
 
@@ -103,7 +105,7 @@ class transaccion extends Conectar
         $sql->bindValue(1, $_POST["nombre"]);
         $sql->bindValue(2, $_POST["apellidos"]);
         $sql->bindValue(3, $_POST["correo"]);
-        $sql->bindValue(4, sha1($_POST["pass"]));
+        $sql->bindValue(4, md5($_POST["pass"]));
         $sql->execute();
     }
 
@@ -132,7 +134,7 @@ class transaccion extends Conectar
         $sql->bindValue(1, $_POST["nombre"]);
         $sql->bindValue(2, $_POST["apellidos"]);
         $sql->bindValue(3, $_POST["correo"]);
-        $sql->bindValue(4, sha1($_POST["pass"]));
+        $sql->bindValue(4, md5($_POST["pass"]));
         $sql->bindValue(5, $_POST["id"]);
 
         $sql->execute();

@@ -1,3 +1,8 @@
+<?php
+
+require_once("conexion/conexion.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -516,3 +521,5 @@
 </body>
 
 </html>
+
+

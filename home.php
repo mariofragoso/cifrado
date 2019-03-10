@@ -1,4 +1,12 @@
-<!DOCTYPE html>
+<?php
+
+require_once("conexion/conexion.php");
+
+
+?>
+
+
+
 <html lang="en">
 
 <head>
@@ -129,7 +137,7 @@
       </li>
 
       <li class="nav-item active">
-        <a class="nav-link" href="usuarios.html">
+        <a class="nav-link" href="usuarios.php">
           <i class="fas fa-fw fa-table"></i>
           <span>Usuarios</span></a>
       </li>
@@ -680,4 +688,6 @@
 
 </body>
 
+
 </html>
+

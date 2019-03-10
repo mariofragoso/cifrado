@@ -4,7 +4,7 @@ if(isset($_POST["enviar"]) and $_POST["enviar"]=="si"){
 
     require_once("php/transaccion.php");
 
-    $usuario = new Usuarios();
+    $usuario = new transaccion();
 
     $usuario->login();
 
@@ -67,7 +67,7 @@ if(isset($_POST["enviar"]) and $_POST["enviar"]=="si"){
 
                               <div class="alert alert-danger alert-dismissible">
                                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                  <h4><i class="icon fa fa-ban"></i> El correo y/o password es incorrecto o no tienes permiso!</h4>
+                                  <h4><i class="icon fa fa-ban"></i> El correo y/o password es incorrecto!</h4>
 
                               </div>
 
@@ -98,10 +98,12 @@ if(isset($_POST["enviar"]) and $_POST["enviar"]=="si"){
 
                 <form class="user" method="post">
                   <div class="form-group">
-                    <input type="email" class="form-control form-control-user" id="correo" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                    <input type="email" name="correo" id="correo" class="form-control" placeholder="Correo" required="required">
+                      <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                   </div>
                   <div class="form-group">
-                    <input type="password" class="form-control form-control-user" id="pass" placeholder="Password">
+                    <input type="password" name="pass" id="pass" class="form-control" placeholder="Contraseña" required>
+                      <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                   </div>
                   <div class="form-group">
                     <div class="custom-control custom-checkbox small">

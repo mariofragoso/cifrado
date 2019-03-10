@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+    session_start();
 
 class Conectar {
 
@@ -35,7 +35,7 @@ class Conectar {
 
     public function ruta(){
 
-        return "http://localhost/proyecto/";
+        return "http://127.0.0.1/cifrado/";
     }
 
 }//cierre de llave conectar
