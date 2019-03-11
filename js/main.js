@@ -71,7 +71,6 @@ function mostrar(id){
     {
 
         data = JSON.parse(data);
-
         $("#usuarioModal").modal("show");
         $('#nombre').val(data.nombre);
         $('#apellidos').val(data.apellidos);

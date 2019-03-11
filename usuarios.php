@@ -437,11 +437,11 @@ require_once("conexion/conexion.php");
                     <input type="email" name="correo" id="correo" class="form-control" placeholder="Correo" required />
                     <br />
 
-                    <label>Contraseña</label>
+                    <label id="etiquetapass">Contraseña</label>
                     <input type="password" name="pass" id="pass" class="form-control" placeholder="Contraseña" required pattern="[A-Za-z][A-Za-z0-9]*[0-9][A-Za-z0-9]*[/*.,:;!]*"/>
                     <br />
 
-                    <label>Repita Contraseña</label>
+                    <label d="etiquetapass2">Repita Contraseña</label>
                     <input type="password" name="pass2" id="pass2" class="form-control" placeholder="Repita Contraseña" required pattern="[A-Za-z][A-Za-z0-9]*[0-9][A-Za-z0-9]*[/*.,:;!]*"/>
                     <br />
 

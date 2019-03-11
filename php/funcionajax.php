@@ -132,8 +132,8 @@ switch ($_GET["op"]) {
                 $output["nombre"] = $row["nombre"];
                 $output["apellidos"] = $row["apellidos"];
                 $output["correo"] = $row["correo"];
-                $output ["pass"] = $row ["pass"];
-                $output["pass2"] = $row["pass"];
+               // $output ["pass"] = $row ["pass"];
+               // $output["pass2"] = $row["pass"];
             }
 
             echo json_encode($output);
