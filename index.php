@@ -102,7 +102,7 @@ if(isset($_POST["enviar"]) and $_POST["enviar"]=="si"){
                       <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                   </div>
                   <div class="form-group">
-                    <input type="password" name="pass" id="pass" class="form-control" placeholder="Contraseña" required>
+                <input type="password" name="pass" id="pass" class="form-control" placeholder="Contraseña" required>
                       <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                   </div>
                   <div class="form-group">
