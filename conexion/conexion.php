@@ -11,7 +11,7 @@ class Conectar {
 
         try {
 
-            $conectar = $this->dbh = new PDO("mysql:local=locahost;dbname=cifrado","root","");
+            $conectar = $this->dbh = new PDO("mysql:local=localhost;dbname=cifrado","root","");
 
             return $conectar;
 
