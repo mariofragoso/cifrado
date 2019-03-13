@@ -354,6 +354,7 @@ require_once("conexion/conexion.php");
                 <!-- Boton de agregar usuario-->
                 <div class="box-header with-border">
                     <h1 class="box-title">
+                        <button class="btn btn-warning btn-lg" id="consultar">Consultar</button>
                         <button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#usuarioModal"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Usuario</button></h1>
                     <div class="box-tools pull-right">
                     </div>
@@ -364,22 +365,8 @@ require_once("conexion/conexion.php");
                         <h6 class="m-0 font-weight-bold text-primary">Descripcion de Usuarios</h6>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="usuario_data" width="100%" cellspacing="0">
-                                <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Apellidos</th>
-                                    <th>Correo</th>
-                                    <th width="10%">Editar</th>
-                                    <th width="10%">Eliminar</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-
-                                </tbody>
-
-                            </table>
+                        <div class="table-responsive" id="table_principal">
+                            
                         </div>
                     </div>
                 </div>

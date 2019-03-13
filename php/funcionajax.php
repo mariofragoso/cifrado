@@ -185,10 +185,10 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["correo"];
 
 
-            $sub_array[] = '<button type="button" onClick="mostrar(' . $row["id"] . ');"  id="' . $row["id"] . '" class="btn btn-warning btn-md update"><i class="glyphicon glyphicon-edit"></i> Editar</button>';
+            $sub_array[] = '<button type="button" onClick="mostrar(' . $row["id"] . ');"  id="' . $row["id"] . '" class="btn btn-warning btn-md update"><img src="https://pngimage.net/wp-content/uploads/2018/05/editar-imagen-png-5.png" width="40px" height="40px"></button>';
 
 
-            $sub_array[] = '<button type="button" onClick="eliminar(' . $row["id"] . ');"  id="' . $row["id"] . '" class="btn btn-danger btn-md"><i class="glyphicon glyphicon-edit"></i> Eliminar</button>';
+            $sub_array[] = '<button type="button" onClick="eliminar(' . $row["id"] . ');"  id="' . $row["id"] . '" class="btn btn-danger btn-md"> <img src="https://cdn.icon-icons.com/icons2/927/PNG/512/Line_ui_icons_Svg-03_icon-icons.com_72170.png" width="40px" height="40px"></button>';
 
 
             $data[] = $sub_array;

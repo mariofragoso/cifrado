@@ -11,7 +11,7 @@ class Conectar {
 
         try {
 
-            $conectar = $this->dbh = new PDO("mysql:local=127.0.0.1;dbname=cifrado","root","");
+            $conectar = $this->dbh = new PDO("mysql:local=locahost;dbname=cifrado","root","");
 
             return $conectar;
 
@@ -35,7 +35,7 @@ class Conectar {
 
     public function ruta(){
 
-        return "http://127.0.0.1/cifrado/";
+        return "http://localhost/cifrado/";
     }
 
 }//cierre de llave conectar

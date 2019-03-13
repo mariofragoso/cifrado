@@ -1,6 +1,11 @@
 var tabla;
 
-
+$(document).ready(function(){
+   $('#consultar').on('click',function(){
+    $('#table_principal').load('tabla.php');
+   });
+  
+});
 //Funcion que se ejectua al inicio
 function init() {
     listar();
